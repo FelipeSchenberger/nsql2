@@ -2,10 +2,9 @@ version: '3.8'
 
 services:
   redis:
-    image: redis/redis-stack:latest
+    image: redis:latest # Cambiar a la imagen básica de Redis
     ports:
-      - "6379:6379"
-      - "8001:8001"
+      - "6379:6379" # Mantener solo el puerto estándar de Redis
     volumes:
       - redis-data:/data
     networks:
@@ -40,7 +39,7 @@ services:
     depends_on:
       - backend
     environment:
-      - REACT_APP_API_URL=http://localhost:5000
+      - REACT_APP_API_URL=http://backend:5000
     networks:
       - app-network
 

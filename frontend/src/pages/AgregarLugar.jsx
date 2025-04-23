@@ -8,32 +8,45 @@ const AgregarLugar = () => {
   const [mensaje, setMensaje] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const nuevoLugar = { nombre, categoria, lat, lon }
+    const nuevoLugar = {
+      nombre,
+      categoria,
+      lat: parseFloat(lat),
+      lon: parseFloat(lon),
+    };
+
+    // Validar rango de latitud y longitud
+    if (nuevoLugar.lat < -90 || nuevoLugar.lat > 90 || nuevoLugar.lon < -180 || nuevoLugar.lon > 180) {
+      setMensaje('Latitud o longitud fuera de rango');
+      return;
+    }
+
+    console.log(nuevoLugar);
 
     try {
-      const res = await fetch('http://backend:5000/api/lugares', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/lugares`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nuevoLugar),
       });
 
-      const data = await res.json()
+      const data = await res.json();
 
       if (res.ok) {
-        setMensaje('Lugar agregado con éxito')
-        setNombre('')
-        setCategoria('')
-        setLat('')
-        setLon('')
+        setMensaje('Lugar agregado con éxito');
+        setNombre('');
+        setCategoria('');
+        setLat('');
+        setLon('');
       } else {
-        setMensaje(data.error || 'Error al agregar el lugar')
+        setMensaje(data.error || 'Error al agregar el lugar');
       }
     } catch (error) {
-      setMensaje('Error al conectar con el servidor')
+      setMensaje('Error al conectar con el servidor');
     }
-  }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-8 p-4 border rounded shadow">

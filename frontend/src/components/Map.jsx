@@ -16,6 +16,7 @@ function Map() {
                     <input type="text" placeholder="Latitud" className="map-input" />
                     <input type="text" placeholder="Longitud" className="map-input" />
                     <button className="map-button">Buscar</button>
+                    <button className="map-button">Guardar</button>
                 </div>
                 <iframe 
                     className="map-iframe"

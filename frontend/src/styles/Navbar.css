@@ -28,16 +28,6 @@
   text-shadow: 2px 2px 4px #000000;
 }
 
-.hidden {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
-.visible {
-  transform: translateY(0);
-  opacity: 1;
-}
-
 ul {
   list-style: none;
   display: flex;

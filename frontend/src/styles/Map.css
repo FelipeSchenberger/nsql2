@@ -34,7 +34,7 @@
     color: white;
     text-shadow: 4px 4px 8px #000000;
     z-index: 2;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 .map-title {
@@ -81,7 +81,7 @@
 .map-button {
     font-size: 20px;
     padding: 20px 20px;
-    background-color: #44160e;
+    background-color: #922916;
     color: white;
     border: none;
     border-radius: 5px;
@@ -90,7 +90,15 @@
 }
 
 .map-button:hover {
-    background-color: #a1333385;
+    background-color: #722525d5;
     transition: background-color 0.3s ease;
+    z-index: 2;
+}
+
+.map-message {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
     z-index: 2;
 }

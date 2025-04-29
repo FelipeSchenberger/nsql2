@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import '../styles/AgregarLugar.css'
 
 const AgregarLugar = () => {
   const [nombre, setNombre] = useState('')
@@ -49,57 +50,57 @@ const AgregarLugar = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-4 border rounded shadow">
-      <h2 className="text-xl font-bold mb-4">Agregar Lugar</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Nombre"
-          value={nombre}
-          onChange={e => setNombre(e.target.value)}
-          className="w-full border px-2 py-1 rounded"
-          required
-        />
+      <div className="agregar-super-container">
+        <h2 className="h2-agregar">Agregar Lugar</h2>
+        <form onSubmit={handleSubmit} className="form-agregar">
+          <input
+            type="text"
+            placeholder="Nombre"
+            value={nombre}
+            onChange={e => setNombre(e.target.value)}
+            className="input-agregar"
+            required
+          />
 
-        <select
-          value={categoria}
-          onChange={e => setCategoria(e.target.value)}
-          className="w-full border px-2 py-1 rounded"
-          required
-        >
-          <option value="">Selecciona una categoría</option>
-          <option value="cervecerias">Cervecerías Artesanales</option>
-          <option value="universidades">Universidades</option>
-          <option value="farmacias">Farmacias</option>
-          <option value="emergencias">Centros de Atención de Emergencias</option>
-          <option value="supermercados">Supermercados</option>
-        </select>
+          <select
+            value={categoria}
+            onChange={e => setCategoria(e.target.value)}
+            className="input-agregar"
+            required
+          >
+            <option value="">Selecciona una categoría</option>
+            <option value="cervecerias">Cervecerías Artesanales</option>
+            <option value="universidades">Universidades</option>
+            <option value="farmacias">Farmacias</option>
+            <option value="emergencias">Centros de Atención de Emergencias</option>
+            <option value="supermercados">Supermercados</option>
+          </select>
 
-        <input
-          type="number"
-          placeholder="Latitud"
-          value={lat}
-          onChange={e => setLat(e.target.value)}
-          className="w-full border px-2 py-1 rounded"
-          required
-        />
-        <input
-          type="number"
-          placeholder="Longitud"
-          value={lon}
-          onChange={e => setLon(e.target.value)}
-          className="w-full border px-2 py-1 rounded"
-          required
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-        >
-          Agregar
-        </button>
-        {mensaje && <p className="mt-2 text-center text-sm text-green-600">{mensaje}</p>}
-      </form>
-    </div>
+          <input
+            type="number"
+            placeholder="Latitud"
+            value={lat}
+            onChange={e => setLat(e.target.value)}
+            className="input-agregar"
+            required
+          />
+          <input
+            type="number"
+            placeholder="Longitud"
+            value={lon}
+            onChange={e => setLon(e.target.value)}
+            className="input-agregar"
+            required
+          />
+          <button
+            type="submit"
+            className="button-agregar"
+          >
+            Agregar
+          </button>
+        </form>
+          {mensaje && <p className="agregar-mensaje">{mensaje}</p>}
+      </div>
   )
 }
 

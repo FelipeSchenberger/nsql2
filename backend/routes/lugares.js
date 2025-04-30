@@ -14,8 +14,7 @@ router.post('/lugares', async (req, res) => {
   }
 
   try {
-    // Guardar en Redis usando GEOADD
-    const key = categoria; // Usar la categoría como clave
+    const key = categoria;
     await client.geoAdd(key, { longitude: lon, latitude: lat, member: nombre });
 
     res.status(201).json({ message: 'Lugar agregado con éxito' });
@@ -56,7 +55,6 @@ router.post('/buscar', async (req, res) => {
         for (const lugar of lugares) {
           const [nombre, distancia] = lugar;
 
-          // Obtener las coordenadas del lugar usando GEOPOS
           const coordenadas = await client.sendCommand([
             'GEOPOS',
             categoria,
@@ -78,7 +76,7 @@ router.post('/buscar', async (req, res) => {
 
         resultados[categoria] = lugaresConCoordenadas;
       } else {
-        resultados[categoria] = []; // Categoría sin resultados
+        resultados[categoria] = [];
       }
     }
 

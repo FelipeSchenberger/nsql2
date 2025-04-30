@@ -18,7 +18,6 @@ const AgregarLugar = () => {
       lon: parseFloat(lon),
     };
 
-    // Validar rango de latitud y longitud
     if (nuevoLugar.lat < -90 || nuevoLugar.lat > 90 || nuevoLugar.lon < -180 || nuevoLugar.lon > 180) {
       setMensaje('Latitud o longitud fuera de rango');
       return;

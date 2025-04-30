@@ -2,9 +2,9 @@ version: '3.8'
 
 services:
   redis:
-    image: redis:latest # Cambiar a la imagen básica de Redis
+    image: redis:latest
     ports:
-      - "6379:6379" # Mantener solo el puerto estándar de Redis
+      - "6379:6379"
     volumes:
       - redis-data:/data
     networks:

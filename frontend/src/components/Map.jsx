@@ -3,9 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import '../styles/Map.css';
-import userIconUrl from '../assets/location.svg'; // Ruta al ícono local
+import userIconUrl from '../assets/location.svg';
 
-// Configuración para los íconos de Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -13,9 +12,8 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
-// Ícono personalizado para la ubicación del usuario
 const userIcon = new L.Icon({
-  iconUrl: userIconUrl, // Ícono rojo local
+  iconUrl: userIconUrl,
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
   iconSize: [25, 41],
   iconAnchor: [12, 41],
@@ -23,11 +21,10 @@ const userIcon = new L.Icon({
   shadowSize: [41, 41],
 });
 
-// Componente para centrar el mapa dinámicamente
 const CenterMap = ({ lat, lon }) => {
   const map = useMap();
   if (lat && lon && !isNaN(lat) && !isNaN(lon)) {
-    map.setView([lat, lon], 14); // Centrar el mapa en las coordenadas
+    map.setView([lat, lon], 14);
   }
   return null;
 };
@@ -36,7 +33,7 @@ const Map = () => {
   const [lat, setLat] = useState('');
   const [lon, setLon] = useState('');
   const [mensaje, setMensaje] = useState('');
-  const [lugares, setLugares] = useState([]); // Para almacenar los lugares encontrados
+  const [lugares, setLugares] = useState([]);
 
   const handleBuscar = async (e) => {
     e.preventDefault();
@@ -76,13 +73,11 @@ const Map = () => {
       if (res.ok) {
         console.log('Lugares encontrados:', data);
 
-        // Combinar todos los lugares en un solo array con categoría y coordenadas incluidas
         const lugaresEncontrados = [];
         for (const categoria in data) {
           data[categoria].forEach((lugar) => {
             const { nombre, distancia, lat, lon } = lugar;
 
-            // Validar que las coordenadas sean números válidos
             if (lat !== undefined && lon !== undefined && !isNaN(lat) && !isNaN(lon)) {
               lugaresEncontrados.push({
                 nombre,
@@ -115,7 +110,7 @@ const Map = () => {
         <div className="map-header">
           <h2 className="map-title">Selecciona tu ubicación</h2>
           <p className="map-description">
-            Selecciona tu ubicación en el mapa para obtener información sobre los lugares turísticos cercanos.
+            Selecciona tu latitud y longitud para obtener información sobre los lugares turísticos cercanos.
           </p>
         </div>
         <form className="map-inputs" onSubmit={handleBuscar}>
@@ -139,7 +134,6 @@ const Map = () => {
         </form>
         {mensaje && <p className="map-message">{mensaje}</p>}
 
-        {/* Mapa interactivo */}
         <MapContainer
           center={[-32.479223726693064, -58.243941131279534]} // Coordenadas iniciales
           zoom={14}
@@ -149,9 +143,7 @@ const Map = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          {/* Centrar el mapa dinámicamente */}
           <CenterMap lat={parseFloat(lat)} lon={parseFloat(lon)} />
-          {/* Marcador para la ubicación del usuario */}
           {lat && lon && !isNaN(parseFloat(lat)) && !isNaN(parseFloat(lon)) && (
             <Marker position={[parseFloat(lat), parseFloat(lon)]} icon={userIcon}>
               <Popup>
@@ -163,11 +155,10 @@ const Map = () => {
               </Popup>
             </Marker>
           )}
-          {/* Marcadores para los lugares encontrados */}
           {lugares.map((lugar, index) => (
             <Marker
               key={index}
-              position={[lugar.lat, lugar.lon]} // Usa las coordenadas reales del lugar
+              position={[lugar.lat, lugar.lon]}
             >
               <Popup>
                 <strong>{lugar.nombre}</strong>
